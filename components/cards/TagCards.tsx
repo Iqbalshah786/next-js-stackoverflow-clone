@@ -2,13 +2,14 @@ import Link from "next/link";
 import React from "react";
 
 import { getDeviconClassName } from "@/lib/utils";
-import ROUTES from "@/constant/routes";
+
 import { Badge } from "../ui/badge";
+import ROUTES from "@/constant/routes";
 
 interface Props {
   _id: string;
   name: string;
-  questions: number;
+  questions?: number;
   showCount?: boolean;
   compact?: boolean;
 }
