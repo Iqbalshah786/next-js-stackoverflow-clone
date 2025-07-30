@@ -6,9 +6,10 @@ import { UserSchema } from "@/lib/validations";
 import { APIErrorResponse } from "@/types/global";
 import { NextResponse } from "next/server";
 
-export async function Get() {
+export async function GET() {
   try {
     await dbConnect();
+    console.log("Fetching users from the database...");
     const users = await User.find();
 
     return NextResponse.json(
