@@ -9,7 +9,6 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     await dbConnect();
-    console.log("Fetching users from the database...");
     const users = await User.find();
 
     return NextResponse.json(
