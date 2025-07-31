@@ -27,12 +27,12 @@ export async function POST(request: Request) {
   try {
     await dbConnect();
     const body = await request.json();
-    const validadatedData = UserSchema.safeParse(body);
-    if (!validadatedData.success) {
-      throw new ValidationError(validadatedData.error.flatten().fieldErrors);
+    const validatedData = UserSchema.safeParse(body);
+    if (!validatedData.success) {
+      throw new ValidationError(validatedData.error.flatten().fieldErrors);
     }
 
-    const { email, username } = validadatedData.data;
+    const { email, username } = validatedData.data;
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       throw new Error("Email already exists.");
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     if (existingUsername) {
       throw new Error("Username already exists.");
     }
-    const newUser = await User.create(validadatedData.data);
+    const newUser = await User.create(validatedData.data);
     return NextResponse.json(
       {
         success: true,
