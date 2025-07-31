@@ -6,6 +6,7 @@ import { UserSchema } from "@/lib/validations";
 import { APIErrorResponse } from "@/types/global";
 import { NextResponse } from "next/server";
 
+// GET all users
 export async function GET() {
   try {
     await dbConnect();
@@ -23,6 +24,7 @@ export async function GET() {
   }
 }
 
+// Create new user
 export async function POST(request: Request) {
   try {
     await dbConnect();
