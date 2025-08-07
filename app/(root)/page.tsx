@@ -6,7 +6,7 @@ import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constant/routes";
 import handleError from "@/lib/handlers/error";
-import dbConnect from "@/lib/monoose";
+import { api } from "@/lib/api";
 
 const questions = [
   {
@@ -51,7 +51,7 @@ const questions = [
 
 const test = async () => {
   try {
-    await dbConnect();
+    return await api.users.getAll();
   } catch (error) {
     return handleError(error);
   }
@@ -64,8 +64,8 @@ interface SearchParams {
 const Home = async ({ searchParams }: SearchParams) => {
   const { query = "", filter = "" } = await searchParams;
 
-  const result = await test();
-  console.log(result);
+  const users = await test();
+  console.log(users);
 
   const filteredQuestions = questions.filter((question) => {
     const matchesQuery = question.title
